@@ -9,8 +9,8 @@ public class Car implements Runnable {
     static {
         CARS_COUNT = 0 ;
        ai = new AtomicInteger(0);
-
     }
+
     private CyclicBarrier barrier;
     private Race race;
     private int speed;
@@ -44,7 +44,6 @@ public class Car implements Runnable {
                 System.out.println(name + " - WIN");
             }
             barrier.await();
-
 
         } catch (Exception e) {
             e.printStackTrace();

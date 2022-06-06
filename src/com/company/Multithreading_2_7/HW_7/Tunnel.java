@@ -15,18 +15,20 @@ public class Tunnel extends Stage {
     @Override
     public void go(Car c) {
         try {
-            if (!smp.tryAcquire()) {
+            if (!smp.tryAcquire()) { //если с tryAcquire не удалось захватить семафор, то машина готовится
+                //и будем ждать когда нужно захватить, если удалось, то машина сразу начала этап
                System.out.println(c.getName() + " готовится к этапу(ждет): " +
                             description);
                smp.acquire();
             }
                 System.out.println(c.getName() + " начал этап: " + description);
-                Thread.sleep(length / c.getSpeed() * 1000);
+                Thread.sleep(length / c.getSpeed() * 1000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
                 System.out.println(c.getName() + " закончил этап: " +
                         description);
+                smp.release();
         }
     }
 }
