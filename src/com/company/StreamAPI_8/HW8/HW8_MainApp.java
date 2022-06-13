@@ -26,7 +26,7 @@ public class HW8_MainApp {
 
     public static void ex2() {
         list().stream()
-                .mapToInt(Employee::getSalary)
+                .mapToDouble(Employee::getSalary)
                 .average()
                 .ifPresent(System.out::println);
     }
