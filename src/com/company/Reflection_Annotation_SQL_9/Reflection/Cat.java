@@ -1,4 +1,4 @@
-package com.company.Reflection_Annotation_SQL_9;
+package com.company.Reflection_Annotation_SQL_9.Reflection;
 
 public class Cat {
     private int privateField;

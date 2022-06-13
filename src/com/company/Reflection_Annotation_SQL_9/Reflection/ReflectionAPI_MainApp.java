@@ -1,13 +1,17 @@
-package com.company.Reflection_Annotation_SQL_9;
+package com.company.Reflection_Annotation_SQL_9.Reflection;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Arrays;
 
 public class ReflectionAPI_MainApp {
-    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, MalformedURLException, ClassNotFoundException {
         /*
         Когда запускается приложение, то Джава не загружает в память все классы, которое есть, а подгружает их
         по мере обращения. Когда классы загружаются в память они складываются в специальном месте - metaspace
@@ -82,14 +86,16 @@ public class ReflectionAPI_MainApp {
                 .getConstructor(int.class, int.class, int.class)
                 .newInstance(20,30, 40);
         System.out.println(cat3);
+        System.out.println("----------");
 
-
-
-
-
-
-
-
+        //Загрузим класс вне проекта с помощью ClassLoader
+        ClassLoader classLoader = new URLClassLoader(new URL[] {new File("C:/ClassLoaderFolder").toURL()});
+        Class humanClass = classLoader.loadClass("Human");
+        //создадим объект загруженного класса
+        Object humanObj = humanClass.getConstructor(String.class, int.class).newInstance("Bob", 30);
+        //метод загруженного класса
+        Method greetingsMethod = humanClass.getMethod("greetings");
+        greetingsMethod.invoke(humanObj); // вызываем метод greetings у humanObj
 
     }
 
@@ -114,6 +120,5 @@ public class ReflectionAPI_MainApp {
         // Для проверки модификаторов используются методы isPublic(), isPrivate(), isAbstract(), isFinal(), isNative(),
         // isInterface(), isSynchronized(), isVolatile(), isStrict(), isTransient(), isProtected(), isStatic().
     }
-
 }
 
