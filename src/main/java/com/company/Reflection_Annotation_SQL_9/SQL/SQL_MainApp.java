@@ -7,28 +7,54 @@ public class SQL_MainApp {
     private static Statement statement;
     private static PreparedStatement preparedStatement; //чтобы не возникло SQL инъекций
 
+    /*
+    App -> JDBC -> Driver -> SQLite/PostgreSQL - с базами данных мы работаем с помощью интерфейсов, поэтому не создаем объектов
+    */
 
     public static void main(String[] args) throws Exception{
         try {
             connect();
-            clearTableEx();
-            /*
-            Если вдруг понадобилось десктопное приложение, если пользователь вводит например id и она попадает
-            в SQL запрос, то может возникнуть SQL injection.
-            SELECT score FROM students WHERE id = <<то что вводит пользователь>> 1; DROP TABLE
-            то запрос по селекту преобразуется в селект + дроп тейбл
-            */
-            for (int i = 0; i < 10; i++) {
-                preparedStatement.setString(1,  "Bob" + (i + 1)); //установка имени
-                preparedStatement.setInt(2,  50); //установка баллов
-                preparedStatement.executeUpdate();
-            }
+
+
         } catch (SQLException e ) {
             e.printStackTrace();
         } finally {
             disconnect();
         }
     }
+
+    private static void rollbackEx() throws SQLException {
+        statement.executeUpdate("INSERT INTO students (name, score) VALUES ('Bob1', 90)");
+        Savepoint sp1 = connection.setSavepoint(); // сейвпоинт, запоминает на этом этапе состояние таблицы
+        // если включен автокоммит, то мы не сможем откатывать изменения, сейвпоинт работает в пределах одной транзакции
+        // когда мы создали сейвпоинт автокоммит выключается, поэтому без включения коммита записи после сейвпоинта не добавятся
+        statement.executeUpdate("INSERT INTO students (name, score) VALUES ('Bob2', 80)");
+        connection.rollback(sp1); // откатили таблицу к сейвпоинту
+        statement.executeUpdate("INSERT INTO students (name, score) VALUES ('Bob3', 70)");
+        connection.commit(); // когда мы сделали коммит все сейвпоинты на автомате вычищаются
+    }
+
+     private static void transactionAndPreparedStatement() throws SQLException {
+         long time = System.currentTimeMillis();
+         connection.setAutoCommit(false); //выключаем автокоммит, чтобы каждый запрос не заворачивался в транзакцию
+            /*
+            Если вдруг понадобилось десктопное приложение, если пользователь вводит например id и она попадает
+            в SQL запрос, то может возникнуть SQL injection.
+            SELECT score FROM students WHERE id = <<то что вводит пользователь>> 1; DROP TABLE
+            то запрос по селекту преобразуется в селект + дроп тейбл
+            */
+         for (int i = 0; i < 10000 ; i++) {
+             //10000 добавлений 72 секунды, connection.setAutoCommit(false) чтобы ускорить
+             preparedStatement.setString(1,  "Bob" + (i + 1)); //установка имени
+             preparedStatement.setInt(2,  50); //установка баллов
+             // preparedStatement.setObject(); если не знаете какой тип у столбца в бд
+//             preparedStatement.executeUpdate();
+             preparedStatement.addBatch(); // копим пакет запросов
+         }
+         preparedStatement.executeBatch(); // возвращает массив интов, сколько каждый отдельный запрос поменял строк
+         connection.commit(); // включаем коммит, чтобы завершить одну транзакцию -> 10000 запросов за одну транзакцию
+         System.out.println(System.currentTimeMillis() - time);
+     }
 
      private static void updateEx() throws SQLException {
         // обновление строки таблицы
@@ -81,7 +107,7 @@ public class SQL_MainApp {
                                                                                 // то она указывается, если нужен логин,
                                                                                  // то указывается через запятую
             statement = connection.createStatement();
-            preparedStatement = connection.prepareStatement("INSERT INTO students (name, score VALUES (?, ?);"); //запрос проходит при компиляции и ничего другого в него не добавится
+            preparedStatement = connection.prepareStatement("INSERT INTO students (name, score) VALUES (?, ?);"); //запрос проходит при компиляции и ничего другого в него не добавится
         } catch (ClassNotFoundException | SQLException e) {
             throw new SQLException("Unable to connect");
         }
@@ -92,6 +118,7 @@ public class SQL_MainApp {
         // рекомендуется сначала закрывать statement, а потом connection, нужно закрывать в разных try/catch
         try {
             statement.close();
+            preparedStatement.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -101,10 +128,5 @@ public class SQL_MainApp {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
-
-
-
-
 }
