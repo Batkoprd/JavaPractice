@@ -14,6 +14,9 @@ public class SQL_MainApp {
     public static void main(String[] args) throws Exception{
         try {
             connect();
+            statement.executeUpdate("INSERT INTO students (name, score) VALUES ('Bob1', 90)");
+
+
 
 
         } catch (SQLException e ) {
