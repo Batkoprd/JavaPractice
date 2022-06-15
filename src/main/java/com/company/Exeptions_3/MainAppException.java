@@ -50,7 +50,7 @@ public class MainAppException {
         FileOutputStream out = null;
         try {
             out = new FileOutputStream("1.txt"); // checked exception метод throws исключение
-            out.write(1); // при записа файла может возникнуть исключение и файл останется открыт
+            out.write(1); // при записи файла может возникнуть исключение и файл останется открыт
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
