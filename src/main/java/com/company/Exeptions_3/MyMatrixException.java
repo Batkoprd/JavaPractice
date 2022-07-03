@@ -9,16 +9,13 @@ public class MyMatrixException extends MyLibException {
         return row;
     }
 
-
     public int getColumn() {
         return column;
     }
 
-
     public Object getValue() {
         return value;
     }
-
 
     public MyMatrixException(int row, int column, int[][] arr) {
         super("Invalid data in [" + row + ";" + column + "]: " + arr[row][column]);

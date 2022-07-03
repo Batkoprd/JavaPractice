@@ -9,13 +9,12 @@ public class ReportMaker {
     public static void makePDFReport(String path, String data) {
         try {
             FileOutputStream out = new FileOutputStream(path); // тут может быть ошибка, что путь к файлу невозможно найти
-            // но мы ее перехватим и сделаем в консоль печать стектрейс
+                                                                // но мы ее перехватим и сделаем в консоль печать стектрейс
             out.write(data.getBytes());
             out.close();
         } catch (IOException  e) {
             e.printStackTrace();
         }
-
     }
 
     public static void makePDFReportCorrect(String path, String data) throws IOException{

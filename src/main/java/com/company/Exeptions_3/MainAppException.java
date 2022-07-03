@@ -1,10 +1,35 @@
 package main.java.com.company.Exeptions_3;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
+
+/*
+Исключения в Java представляют собой объекты, генерируемые при возникновении ошибочных
+ситуаций и содержащие информацию о них. Все исключения можно разделить на три группы:
+1. Класс Exception и его подклассы: исключения, которые обязательно должны быть
+перехвачены программой (Checked).
+2. Класс RuntimeException и его подклассы: исключения, охватывающие такие ситуации, как
+деление на ноль или ошибочная индексация массивов (Unchecked).
+3. Класс Error и его подклассы: исключения, которые не должны появляться при нормальном
+выполнении программы. Используются для обозначения ошибок, возникающих в самой
+исполняющей среде (таких, как переполнение стека).
+
+Обработать исключение можно одним из двух способов:
+● Поместить код, бросающий исключение, в блок try-catch.
+● Пробросить исключение методу на уровень выше, то есть методу, который вызывает текущий
+метод. Для этого используется ключевое слово throws.
+
+Две группы исключений типа Exception:
+● Checked — такие исключения обязательно нужно обрабатывать одним из двух
+вышеописанных способов. Если checked-исключение оставить в коде как есть, возникнет
+ошибка на этапе компиляции.
+● Unchecked — их можно обрабатывать, если есть вероятность возникновения, но можно и не
+обрабатывать, поскольку предполагается, что при правильном поведении программы такие
+исключения вовсе не должны возникать. Действительно, если массив состоит из 8 элементов,
+то код не должен обращаться к десятому.
+ */
 
 
 public class MainAppException {
@@ -15,18 +40,21 @@ public class MainAppException {
 //        String string = null;
 //        System.out.println(string.length()); - NullPointerException
             try {
-                System.out.println(1);
+                System.out.println("До возникновения ArithmeticException");
                 int x = 10 / 0;
-                System.out.println(2);
+                System.out.println("После возникновения ArithmeticException");
+                System.out.println ( "Это сообщение не будет выведено в консоль" );
             } catch (ArithmeticException e) {
-                System.out.println("AE catched");
+                System.out.println("ArithmeticException caught, деление на ноль");
 //             e.printStackTrace();
             } finally { //блок finally срабатывает всегда
-                System.out.println(3);
+                System.out.println("Сработал блок finally");
             }
+        System.out.println("---------------------------------");
 
 
-            //try-catch могут быть вложенные
+
+        //try-catch могут быть вложенные
 
 //        ServerSocket serverSocket = null;
 //        try {
@@ -40,10 +68,42 @@ public class MainAppException {
 //            }
 //        }
 
+        System.out.println("Блоков catch может быть несколько: ");
         try {
-            a();
+            int a = 10 ;
+            a -= 10 ;
+            int b = 42 / a ;
+            int[] с = { 1 , 2 , 3 };
+            с[42] = 99 ;
+        } catch (ArithmeticException е) {
+            System.out.println ( "Первый блок catch, дeлeниe на ноль: " + е);
+        } catch (ArrayIndexOutOfBoundsException е){
+            System.out.println ( "Второй блок catch, ошибка индексации массива: " + е);
+        }
+        /*
+        Применяя несколько операторов catch, нужно помнить, что перехватывать исключения из подклассов
+        нужно раньше, чем из суперклассов. Дело в том, что оператор саtch, в котором перехватывается
+        исключение из суперкласса, будет перехватывать все исключения этого суперкласса, а также всех его
+        подклассов. Это означает, что исключения из подкласса вообще не будут обработаны, если
+        попытаться перехватить их после исключений из его суперкласса.
+         */
+        System.out.println("---------------------------------");
+
+//        try {
+//            int а = 0 ;
+//            int b = 42 / а;
+//        } catch (Exception е) {
+//            System.out.println ( "Exception" );
+//        }
+//        catch (ArithmeticException е) { // Ошибка компиляции: недостижимый код!
+//            System . out . println ( "Этот код недостижим" );
+//        }
+
+
+        try {
+            methodCallingMethodCausingArithmeticException();
         } catch (ArithmeticException e) {
-            System.out.println("main перехватил AE");
+            System.out.println("main перехватил ArithmeticException");
         }
 
         //    int a = 10/0; - unchecked exception;
@@ -74,12 +134,13 @@ public class MainAppException {
 //    public FileOutputStream(String name) throws FileNotFoundException {
 //        this(name != null ? new File(name) : null, false);
 
-        System.out.println();
+        System.out.println("---------------------------------");
         System.out.println("До throw");
         try {
-            throw new RuntimeException("Runtime Exception");
+            System.out.println("В блоке try пробрасывается RuntimeException");
+            throw new RuntimeException("RuntimeException");
         } catch (RuntimeException e) {
-            System.out.println("RE");
+            System.out.println("В блоке catch пойман RuntimeException");
         }
 
         int coef = 0;
@@ -110,19 +171,24 @@ public class MainAppException {
             e.printStackTrace();
         }
 
-        System.out.println(doSomethingfinally()); //вернет 2, даже если finally после return - так лучше не делать
+        System.out.println("---------------------------------");
+        System.out.println("Метод doSomethingFinally(), который возвращает значение после return из блока finally " + "\n"
+                + doSomethingfinally()); //вернет 2, даже если finally после return - так лучше не делать
 
-        throw new MyLibException("Мое исключение");
-
-
-
+        try{
+            System.out.println("---------------------------------");
+            System.out.println("До проброса кастомного MyLibException");
+            throw new MyLibException("Мое исключение");
+        } catch (MyLibException e) {
+            System.out.println("Поймали кастомное MyLibException");
+        }
     }
 
-    public static void a () {
-        b();
+    public static void methodCallingMethodCausingArithmeticException() {
+        methodCausingArithmeticException();
     }
 
-    public static void b () {
+    public static void methodCausingArithmeticException() {
         int x = 10 / 0;
     }
 
@@ -141,11 +207,11 @@ public class MainAppException {
         FileOutputStream out = new FileOutputStream("2.txt");
     }
 
-    public static int doSomethingfinally() {
+    public static String doSomethingfinally() {
         try {
-            return 1;
+            return "Значение return из блока try";
         } finally {
-            return 2;
+            return "Значение return из блока finally";
         }
     }
 
