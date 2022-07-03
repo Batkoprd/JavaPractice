@@ -12,10 +12,11 @@ public class SimpleBox {
     }
 
     public SimpleBox(Object obj) {
+        System.out.println("Конструктор SimpleBox, которая в себе хранит объект типа Object: " + obj + ", класса " + obj.getClass().getSimpleName());
         this.obj = obj;
     }
-
     public void info() {
+
         System.out.println(obj.getClass().getSimpleName() + " " + obj);
     }
 }

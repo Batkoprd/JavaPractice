@@ -1,13 +1,12 @@
 package main.java.com.company.Generics_Collections_4;
 
-public class GenBox<T> {
+public class GenericBox<T> {
     /*
     T - Type
     E - Element Collections
     K, V Key Value
     */
     T obj;
-
     public T getObj() {
         return obj;
     }
@@ -16,7 +15,8 @@ public class GenBox<T> {
         this.obj = obj;
     }
 
-    public GenBox(T obj) {
+    public GenericBox(T obj) {
+                System.out.println("Конструктор GenericBox коробки, содержащий объект " + obj + " класса " + obj.getClass().getSimpleName());
         this.obj = obj;
     }
 
@@ -26,7 +26,7 @@ public class GenBox<T> {
         // T object = new T();
     }
 
-    // нельзя создавать статические поля  с типом T : static T staticField = ...
+    // нельзя создавать статические поля с типом T : static T staticField = ...
     // потому что статическое поле должно быть общим для всех объектов класса
     // а T может быть разными типами
 }
