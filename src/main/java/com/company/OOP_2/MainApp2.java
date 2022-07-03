@@ -5,7 +5,6 @@ import main.java.com.company.OOP_2.Interfaces.Transport;
 
 public class MainApp2 {
 
-
     // Наша цель заставить человека ездить на разных транспортных средства
     // и останавливать любое из них
     // тут мы создаем класс транспорта, учим его ездить, учим человека ездить на этом транспорте,
@@ -15,25 +14,25 @@ public class MainApp2 {
         private Transport currentTransport;
         private Magic magic; // если мы хотим делать трюки например
 
-
 //        private Car lastCar;
 //        private Skateboard lastSkateboard;
 //        private Bicycle lastBicycle;
 
         public void stop() {
+            System.out.println("Метод stop класса Human:");
             if (currentTransport != null) {
                 currentTransport.stop();
                 currentTransport = null;
             } else {
-                System.out.println("Я никуда и не еду");
-            }
+                System.out.println("Я никуда и не еду - метод stop() класса Human");
 
+            }
         }
 
         public void drive(Transport transport) {
+            System.out.println("Метод drive(Transport transport) класса Human:");
             transport.start();
             this.currentTransport = transport;
-
         }
 
         // если мы хотим например делать трюки на скейте
@@ -68,12 +67,12 @@ public class MainApp2 {
     static class Car implements Transport{
         @Override
         public void start() {
-            System.out.println("Машина поехала");
+            System.out.println("Машина поехала - метод start() класса Car");
         }
 
         @Override
         public void stop() {
-            System.out.println("Машина остановилась");
+            System.out.println("Машина остановилась - метод stop() класса Car");
 
         }
 
@@ -116,7 +115,6 @@ public class MainApp2 {
         @Override
         public void stop() {
             System.out.println("Мотоцикл остановился");
-
         }
     }
 
@@ -127,7 +125,9 @@ public class MainApp2 {
         Transport transport = new Car();
         Human human = new Human();
         human.stop();
+        System.out.println("---------------------------------");
         human.drive(transport);
+        System.out.println("---------------------------------");
         human.stop();
 
     }

@@ -1,9 +1,10 @@
 package main.java.com.company.OOP_2;
 
+import main.java.com.company.OOP_2.Classes.Airplane;
+import main.java.com.company.OOP_2.Classes.Duck;
 import main.java.com.company.OOP_2.Interfaces.Flyable;
 
 public class MainApp {
-
 
     public static void main(String[] args) {
 
@@ -17,19 +18,9 @@ public class MainApp {
         }
 
         Flyable somethingFlyable = new Duck(); // мы можем складывать
-                                               // объекты реализующие интерфейст в ссылку на этот интерфейс
-        // утка умеет и плавать, и летать, но у somethingFlyable можно вызвать метот только fly
+                                               // объекты реализующие интерфейс в ссылку на этот интерфейс
+        // утка умеет и плавать, и летать, но у somethingFlyable можно вызвать метод только fly
         somethingFlyable.fly();
-
         // нельзя создавать объект интерфейса.
-
-
-
-
-
-
-
-
-
     }
 }

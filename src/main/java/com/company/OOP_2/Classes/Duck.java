@@ -1,4 +1,4 @@
-package main.java.com.company.OOP_2;
+package main.java.com.company.OOP_2.Classes;
 
 import main.java.com.company.OOP_2.Interfaces.Flyable;
 import main.java.com.company.OOP_2.Interfaces.Swimable;
@@ -9,7 +9,6 @@ public class Duck implements Flyable, Swimable { // класс должен пе
     @Override
     public void fly() {
         System.out.println("Утка летит");
-
     }
 
     @Override
