@@ -22,7 +22,7 @@ public class MainApp_Lesson_4 {
         } else {
             System.out.println("Получим ошибку, потому что в simpleBox1: " + simpleBox1.getObj().getClass().getSimpleName() +
                     ", а в simpleBox2: " + simpleBox2.getObj().getClass().getSimpleName());
-            System.out.println("Error");
+            System.out.println( "Содержимое коробок отличается по типу");
         }
         System.out.println("---------------------------------");
 
@@ -60,14 +60,14 @@ public class MainApp_Lesson_4 {
         System.out.println(integerBoxWithNumbers.average());
 
         BoxWithNumbers<Float> floatBoxWithNumbers = new BoxWithNumbers<>(1f, 2f, 3f, 4f);
-        System.out.println(floatBoxWithNumbers.average());
 //        BoxWithNumbers<String> stringBoxWithNumbers; String не наследуется от Number
+        System.out.println("---------------------------------");
         System.out.println(integerBoxWithNumbers.compareAverage(floatBoxWithNumbers));
+        System.out.println("---------------------------------");
 
         // В момент компиляции компилятор выкидывает все дженерики, а все <T> заменяются на обжекты
         // и где нужно компилятор расставляет на касты, если <N extends Number> в компиляторе N станет Number а не object
 
-        System.out.println(integerBoxWithNumbers.getClass().getName());
 
         GenericBox<Number> numberGenBox = new GenericBox<>(1);
         GenericBox<Integer> integerGenBox = new GenericBox<>(1);

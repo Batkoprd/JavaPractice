@@ -1,6 +1,6 @@
 package main.java.com.company.Generics_Collections_4;
 
-public class GenericBox<T> {
+public class GenericBox<T> { //Обобщения работают только со ссылочными типами данных. Для работы с примитивами надо будет использовать классы-обёртки.
     /*
     T - Type
     E - Element Collections

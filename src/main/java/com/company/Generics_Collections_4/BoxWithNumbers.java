@@ -8,18 +8,23 @@ public class BoxWithNumbers <N extends Number>{
         this.array = array;
     }
 
+    public void printComment() {
+
+    }
+
     public double average() {
-        System.out.println("Считаем среднее значение, содержащихся в коробке BoxWithNumbers чисел: ");
         double avg = 0.0;
         for (int i = 0; i < array.length; i++) {
             avg += array[i].doubleValue();
         }
         avg /= array.length;
+        System.out.println("Считаем среднее значение, содержащихся в коробке BoxWithNumbers чисел: " + avg);
         return avg;
     }
 
     public boolean compareAverage(BoxWithNumbers<?> another) { // <?> wildcard используется
         // когда не важно какой тип в коробке
+        System.out.println("Сравним среднее значение двух BoxWithNumbers: ");
         return Math.abs(this.average() - another.average()) < 0.0001;
     }
 }
