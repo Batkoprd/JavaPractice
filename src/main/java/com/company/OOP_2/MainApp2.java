@@ -1,5 +1,8 @@
 package main.java.com.company.OOP_2;
 
+import main.java.com.company.OOP_2.Interfaces.Magic;
+import main.java.com.company.OOP_2.Interfaces.Transport;
+
 public class MainApp2 {
 
 

@@ -1,8 +1,6 @@
 package main.java.com.company.OOP_1.animals;
 
-import main.java.com.company.OOP_1.animals.Animal;
-
-public abstract class CowExtends extends Animal {
+public abstract class CowExtendsAnimal extends AnimalAbstractSuperclass {
     @Override
     public void info() {
         System.out.println(name); // поле name недоступно вне пакета animals

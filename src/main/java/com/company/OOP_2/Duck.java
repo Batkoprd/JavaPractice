@@ -1,6 +1,9 @@
 package main.java.com.company.OOP_2;
 
-public class Duck implements Flyable, Swimable{ // класс должен переопределять методы из интерфейсов
+import main.java.com.company.OOP_2.Interfaces.Flyable;
+import main.java.com.company.OOP_2.Interfaces.Swimable;
+
+public class Duck implements Flyable, Swimable { // класс должен переопределять методы из интерфейсов
 
 
     @Override

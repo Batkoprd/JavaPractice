@@ -1,4 +1,4 @@
-package main.java.com.company.OOP_2;
+package main.java.com.company.OOP_2.Interfaces;
 
 public interface Flyable {
     //public abstract void fly();
