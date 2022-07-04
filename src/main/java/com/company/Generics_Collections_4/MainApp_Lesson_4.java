@@ -69,6 +69,15 @@ public class MainApp_Lesson_4 {
         // и где нужно компилятор расставляет на касты, если <N extends Number> в компиляторе N станет Number а не object
 
 
+        TwoGen<Integer, String> twoGenObj = new TwoGen<Integer, String>( 555 ,
+                "Hello" );
+        twoGenObj.showTypes();
+        int intValue = twoGenObj.getObj1();
+        String strValue = twoGenObj.getObj2();
+        System.out.println("Значение первого параметра: " + intValue);
+        System.out.println("Значение второго параметра: " + strValue);
+        System.out.println("---------------------------------");
+
         GenericBox<Number> numberGenBox = new GenericBox<>(1);
         GenericBox<Integer> integerGenBox = new GenericBox<>(1);
         doSomething1(numberGenBox);
@@ -79,7 +88,7 @@ public class MainApp_Lesson_4 {
         // В обобщениях наследования не работают
         // Слева можно складывать любые Numbers, а справа наследник Integer,
         // но Number слева говорит, что туда можно подавать float и тд, а слева только Integer
-//        GenBox<Number> gbx = new GenBox<Integer>(123);
+        // GenBox<Number> gbx = new GenBox<Integer>(123);
     }
 
     public static void method1(int[] arr) {}
@@ -90,5 +99,26 @@ public class MainApp_Lesson_4 {
     public static void doSomething3(GenericBox<? super Number> box) {} // либо Number либо его родитель
     public static <T /*extends Number*/> T getFirstElement(List<T> list) {
         return list.get(0);
+    }
+}
+
+class TwoGen<T, V> {
+    private T obj1;
+    private V obj2;
+    public TwoGen(T obj1, V obj2) {
+        System.out.println("Конструктор класса TwoGen с двумя параметрами: " + obj1.getClass().getSimpleName() + " и "
+                + obj2.getClass().getSimpleName());
+        this.obj1 = obj1;
+        this.obj2 = obj2;
+    }
+    public void showTypes() {
+        System.out.println( "Тип T: " + obj1.getClass().getName());
+        System.out.println( "Тип V: " + obj2.getClass().getName());
+    }
+    public T getObj1() {
+        return obj1;
+    }
+    public V getObj2() {
+        return obj2;
     }
 }
