@@ -144,6 +144,8 @@ public class MainApp5 {
             }
         }
         System.out.println("Получившийся список: " + list);
+        System.out.println("---------------------------------");
+
         //Collections remove
 //        list.removeIf(o -> o.equals("A"));
 
@@ -162,6 +164,14 @@ public class MainApp5 {
             При работе с листами можно не только обходить элементы и удалять их, но и: работать с индексами элементов,
         добавлять/изменять объекты в коллекции, двигаться не только вправо, но и влево по списку.
          */
+
+        List<Cat> cats = new ArrayList<>(Arrays.asList(
+                new Cat( "A" , 5 ), new Cat( "B" , 2 ), new Cat( "C" , 4 )
+        ));
+        System.out.println("Коты: " + cats);
+        Collections.sort(cats);
+        System.out.println("Котов отсортировали в порядке увеличения возраста: " + cats);
+
     }
 
     public static void testMap(Map<Integer, String> map) {
@@ -176,4 +186,33 @@ public class MainApp5 {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
     }
+}
+
+ class Cat implements Comparable{
+    private String name;
+    private int age;
+    public Cat(String name, int age) {
+        this .name = name;
+        this .age = age;
+    }
+
+     @Override
+     public String toString() {
+         return "Cat{" +
+                 "name='" + name + '\'' +
+                 ", age=" + age +
+                 '}';
+     }
+
+     @Override
+     public int compareTo(Object o) {
+         Cat another = (Cat)o;
+         if ( this .age > another.age) {
+             return 1 ;
+         }
+         if ( this .age < another.age) {
+             return - 1 ;
+         }
+         return 0 ;
+     }
 }
