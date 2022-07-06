@@ -1,10 +1,14 @@
-package main.java.com.company.Multithreading_2_7.Concurrency;
+package main.java.com.company.Multithreading_2_7.CyclicBarrier;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
+/*
+CyclicBarrier выполняет синхронизацию заданного количества потоков в одной точке. Как только
+заданное количество потоков заблокировалось (вызовами метода await()) , с них одновременно
+снимается блокировка.
+ */
 public class CyclicBarrierApp {
     static final int THREADS = 5;
     public static void main(String[] args) {

@@ -3,7 +3,16 @@ package main.java.com.company.Multithreading_2_7.Locks;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
+/*
+Интерфейс Lock из пакета java.util.concurrent – это продвинутый механизм синхронизации потоков.
+По гибкости он выигрывает в сравнении с блоками синхронизации.
+    Основные отличия между Lock и синхронизированными блоками:
+● Синхронизированные блоки не гарантируют, что сохранится порядок обращения потоков к
+критической секции;
+● Нельзя выйти из синхронизированного блока по времени ожидания ( timeout );
+● Синхронизированные блоки должны полностью содержаться в одном методе. Lock может
+быть захвачен в одном методе, а освобожден в другом.
+ */
 public class SimpleLockApp {
     public static void main(String[] args) {
         final Lock lock = new ReentrantLock();

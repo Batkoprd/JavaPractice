@@ -1,8 +1,14 @@
-package main.java.com.company.Multithreading_2_7.Concurrency;
+package main.java.com.company.Multithreading_2_7.CountDownLatch;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+/*
+CountDownLatch позволяет потоку ожидать завершения операций, выполняющихся в других потоках.
+Режим ожидания запускается методом await(). При создании объекта определяется количество
+требуемых операций, после чего уменьшается при вызове метода countDown(). Как только счетчик
+доходит до нуля, с ожидающего потока снимается блокировка.
+ */
 public class CountDownLatchApp {
     public static void main(String[] args) {
         final int THREADS_COUNT = 6;

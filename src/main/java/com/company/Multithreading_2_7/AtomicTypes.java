@@ -10,7 +10,5 @@ public class AtomicTypes {
         System.out.println(ai);
         ai.getAndAdd(5);
         System.out.println(ai);
-
-
     }
 }

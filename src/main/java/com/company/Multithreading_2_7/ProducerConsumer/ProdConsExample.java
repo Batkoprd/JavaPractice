@@ -1,15 +1,13 @@
-package main.java.com.company.Multithreading_2_7.Concurrency;
+package main.java.com.company.Multithreading_2_7.ProducerConsumer;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class ProdConsExample {
     static class Producer {
         private ArrayBlockingQueue<String> queue;
-
         public Producer(ArrayBlockingQueue<String> queue) {
             this.queue = queue;
         }
-
         public void put(String x) {
             try {
                 System.out.println("Producer add: " + x);
@@ -22,11 +20,9 @@ public class ProdConsExample {
 
     static class Consumer {
         private ArrayBlockingQueue<String> queue;
-
         public Consumer(ArrayBlockingQueue<String> queue) {
             this.queue = queue;
         }
-
         public String get() {
             try {
                 String str = queue.take();

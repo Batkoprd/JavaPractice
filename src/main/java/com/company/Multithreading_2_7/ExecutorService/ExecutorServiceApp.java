@@ -4,13 +4,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /*
-SingleThreadPool - пул потоков хранящий один поток, если возникает много мелких задач, которые
+Интерфейс java.util.concurrent.ExecutorService представляет собой механизм асинхронного
+выполнения, который способен выполнять задачи в фоновом режиме. Фактически, реализация
+ExecutorService из пакета java.util.concurrent, представляет собой реализацию пула потоков.
+-SingleThreadPool - пул потоков хранящий один поток, если возникает много мелких задач, которые
 нужно в отдельном потоке выполнять, то запустили и периодически туда задачи кидаете, или если есть редкие задачи
-которые занимают какое-то время.
-FixedThreadPool - пул потоков с ограничением, создает некое кол-во потоков и потихоньку их подгружает.
-CachedThreadPool - пул потоков без потолка, сколько задач не даешь он берет их на себя, т.е. если там
+которые занимают какое-то время. ExecutorService executorService1 = Executors.newSingleThreadExecutor();
+-FixedThreadPool - пул потоков с ограничением, создает некое кол-во потоков и потихоньку их подгружает. ExecutorService executorService2 = Executors.newFixedThreadPool( 10 );
+-CachedThreadPool - пул потоков без потолка, сколько задач не даешь он берет их на себя, т.е. если там
 4 нагруженных потоков, то если туда закинуть еще 3 задачи, то он создаст еще 3 потока, если поток 60 секунд
-ничего не делает, то он отключается
+ничего не делает, то он отключается ExecutorService executorService3 = Executors.newCachedThreadPool();
 */
 
 public class ExecutorServiceApp {
