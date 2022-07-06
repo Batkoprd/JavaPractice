@@ -1,4 +1,4 @@
-package main.java.com.company.MultiThreading_1_6.Synchronization.wait_notify;
+package main.java.com.company.MultiThreading_1_6.Examples.p8_wait_notify;
 
 public class WaitNotifyApp {
     private final Object mon = new Object();
@@ -6,27 +6,22 @@ public class WaitNotifyApp {
 
     public static void main(String[] args) {
         WaitNotifyApp waitNotifyApp = new WaitNotifyApp();
-
         new Thread(() -> {
             waitNotifyApp.printA();
         }).start();
         new Thread(() -> {
             waitNotifyApp.printB();
         }).start();
-
     }
-    //Когда поток находится в состоянии wait он не тратит ресурсы процессора и среагирует только на notify
 
     public void printA() {
         synchronized (mon) {
             try {
                 for (int i = 0; i < 5; i++) {
-                    while (currentLetter != 'A') { //цикл while нужен потому что, когда потокА перешел в состояние wait
-                        // то может быть, что поток кто-то разбудит, когда еще не пришла его очередь,
-                        // а в цикле while он будет засыпать и ждать своей очереди
+                    while (currentLetter != 'A') {
                         mon.wait();
                     }
-                    System.out.println("поток A");
+                    System.out.print("A");
                     currentLetter = 'B';
                     mon.notifyAll();
                 }
@@ -43,7 +38,7 @@ public class WaitNotifyApp {
                     while (currentLetter != 'B') {
                         mon.wait();
                     }
-                    System.out.println("Поток B");
+                    System.out.print("B");
                     currentLetter = 'A';
                     mon.notifyAll();
                 }

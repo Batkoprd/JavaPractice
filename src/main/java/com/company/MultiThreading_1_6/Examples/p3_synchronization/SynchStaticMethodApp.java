@@ -1,4 +1,4 @@
-package main.java.com.company.MultiThreading_1_6.Synchronization;
+package main.java.com.company.MultiThreading_1_6.Examples.p3_synchronization;
 
 public class SynchStaticMethodApp {
     public static void main(String[] args) {
@@ -6,15 +6,9 @@ public class SynchStaticMethodApp {
         new Thread(() -> classMethod()).start();
         new Thread(() -> e.objectMethod()).start();
     }
-    //Если мы повесили синхронизацию на статический метод, то это означает, что в один момент времени
-    // только один поток может у данного класса вызывать синхронизированный статический метод, в роли монитора
-    // выступает сам класс
+
     public synchronized static void classMethod() {
-        /*
-        При указании ключевого слова synchronized в объявлении статического метода в роли монитора
-        выступает класс, метод которого был вызван потоком.
-         */
-        System.out.println("Synch static Method start");
+        System.out.println("Synch Static Method Start");
         for (int i = 0; i < 10; i++) {
             try {
                 Thread.sleep(100);

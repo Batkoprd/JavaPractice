@@ -1,6 +1,6 @@
-package main.java.com.company.MultiThreading_1_6.Synchronization.DeadLock;
+package main.java.com.company.MultiThreading_1_6.Examples.p4_deadlock;
 
-public class DeadLockRepaired {
+public class DeadlockRepaired {
     private static final Object lock1 = new Object();
     private static final Object lock2 = new Object();
 
@@ -9,21 +9,20 @@ public class DeadLockRepaired {
         DeadThreadTwo threadTwo = new DeadThreadTwo();
         threadOne.start();
         threadTwo.start();
-
     }
 
     private static class DeadThreadOne extends Thread {
         public void run() {
             synchronized (lock1) {
-                System.out.println("DeadThreadOne is holding LOCK-1... ");
+                System.out.println("DeadThreadOne is holding LOCK 1...");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("DeadThreadOne is waiting for LOCK-2...");
+                System.out.println("DeadThreadOne is waiting for Lock 2...");
                 synchronized (lock2) {
-                    System.out.println("DeadThreadOne is holding LOCK-1 and LOCK-2...");
+                    System.out.println("DeadThreadOne  is holding Lock 1 and Lock 2...");
                 }
             }
         }
@@ -32,19 +31,17 @@ public class DeadLockRepaired {
     private static class DeadThreadTwo extends Thread {
         public void run() {
             synchronized (lock1) {
-                System.out.println("DeadThreadTwo is holding LOCK-1...");
+                System.out.println("DeadThreadTwo is holding LOCK 1...");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("DeadThreadTwo is waiting for LOCK-2...");
+                System.out.println("DeadThreadTwo is waiting for Lock 2...");
                 synchronized (lock2) {
-                    System.out.println("DeadThreadTwo is holding LOCK-1 and LOCK2...");
+                    System.out.println("DeadThreadTwo  is holding Lock 1 and Lock 2...");
                 }
-
             }
         }
-
     }
 }

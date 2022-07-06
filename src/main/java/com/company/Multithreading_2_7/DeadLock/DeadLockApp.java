@@ -1,4 +1,4 @@
-package main.java.com.company.MultiThreading_1_6.Synchronization.DeadLock;
+package main.java.com.company.Multithreading_2_7.DeadLock;
 
 public class DeadLockApp {
     private static final Object lock1 = new Object();

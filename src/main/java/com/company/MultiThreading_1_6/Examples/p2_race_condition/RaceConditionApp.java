@@ -1,4 +1,4 @@
-package main.java.com.company.MultiThreading_1_6.Race_Condition;
+package main.java.com.company.MultiThreading_1_6.Examples.p2_race_condition;
 
 public class RaceConditionApp {
     public static void main(String[] args) {
@@ -20,36 +20,20 @@ public class RaceConditionApp {
                 counter.dec();
                 try {
                     Thread.sleep(5);
-                }   catch (InterruptedException e) {
-                        e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         });
 
-        incThread.start();
-        decThread.start();
-
         try {
+            incThread.start();
+            decThread.start();
             incThread.join();
             decThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println("Значение счетчика: " + counter.value());
-
-        /*
-        Race condition возникает, когда несколько потоков работают с одними и теми же данными
-        */
     }
-}
-
-class Counter {
-    private int c;
-
-    public int value() { return c; }
-
-    public Counter() { c = 0; }
-
-    public void inc() { c++; }
-    public void dec() { c--; }
 }
