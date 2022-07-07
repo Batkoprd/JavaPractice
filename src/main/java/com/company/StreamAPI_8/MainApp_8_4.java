@@ -2,6 +2,7 @@ package main.java.com.company.StreamAPI_8;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
@@ -12,18 +13,22 @@ import java.util.stream.Stream;
 public class MainApp_8_4 {
     public static void main(String[] args) {
         try {
-            Files.lines(Paths.get("text.txt"))
+            System.out.println("Считываем данные из файла и создаем двумерный массив: ");
+            Path path = Path.of("text.txt");
+            Files.lines(path)
                     .map(line -> line.split("\\s"))
                     .distinct()
                     .forEach(arr -> System.out.println(Arrays.toString(arr)));
             System.out.println("--------------------------");
-            Files.lines(Paths.get("text.txt"))
+            System.out.println("Превращаем каждую строку двумерного массива в отдельный stream: ");
+            Files.lines(path)
                     .map(line -> line.split("\\s"))
                     .map(Arrays::stream)
                     .distinct()
                     .forEach(System.out::println);
             System.out.println("--------------------------");
-            System.out.println(Files.lines(Paths.get("text.txt"))
+            System.out.println("Ищем уникальные строки в двумерном массиве с помощью метода flatMap(): ");
+            System.out.println(Files.lines(path)
                     .map(line -> line.split("\\s"))
                     .flatMap(Arrays::stream)
                     .distinct()
@@ -34,7 +39,7 @@ public class MainApp_8_4 {
             e.printStackTrace();
         }
         System.out.println("--------------------------");
-
+        System.out.println("Фильтруем список методом filter и нашей кастомной функцией: ");
         List<Integer> list = Stream.of(1, 2, 3, 4, 5, 6, 7, 8).filter(n -> myOperation(n, 2)).toList();
         System.out.println(list);
         System.out.println("--------------------------");

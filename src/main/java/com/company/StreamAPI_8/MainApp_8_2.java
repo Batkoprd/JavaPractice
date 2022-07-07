@@ -24,7 +24,16 @@ public class MainApp_8_2 {
                 this .age = age;
                 this .position = position;
             }
+
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    ", position=" + position +
+                    "}\n";
         }
+    }
     private static void streamSimpleTask () {
         List<Person> persons = new ArrayList<>(Arrays.asList(
                 new Person( "Bob1" , 35 , Person.Position.MANAGER),
@@ -36,17 +45,21 @@ public class MainApp_8_2 {
                 new Person( "Bob7" , 33 , Person.Position.ENGINEER),
                 new Person( "Bob8" , 37 , Person.Position.MANAGER)
         ));
+        System.out.println("Исходный список сотрудников: \n" + persons);
         List<String> engineersNames = persons.stream()
                 .filter(person -> person.position == Person.Position.ENGINEER)
                 .sorted((o1, o2) -> o1.age - o2.age)
                 .map((Function<Person, String>) person -> person.name)
                 .collect(Collectors.toList());
-        System.out.println(engineersNames);
+        System.out.println("Отфильтровали инженеров и отсортировали по возрастанию возраста: " + engineersNames);
+        System.out.println("--------------------------");
+
     }
 
     public static void main(String[] args) {
         streamSimpleTask();
         List<Integer> integerList = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8));
+        System.out.println("Исходный список: " + integerList);
         //промежуточные операции не будут работать, если не поставить терминальную операцию
         List<Integer> out = integerList.stream().filter(new Predicate<Integer>() {
             @Override
@@ -56,10 +69,11 @@ public class MainApp_8_2 {
         }).toList();
 
         List<Integer> out2 = integerList.stream().filter(integer -> integer % 2 == 0).toList();
-        System.out.println(out);
-        System.out.println(out2);
-
+        System.out.println("Отфильтровали только четные элементы:" + out);
+//        System.out.println(out2);
+        System.out.println("Отфильтровали только нечетные элементы и вывели каждый в новой строке: ");
         integerList.stream().filter((n) -> n% 2 == 1).forEach(System.out::println);
+        System.out.println("--------------------------");
 
         //Способы создавать стримы:
         List<String> list = new ArrayList<>(Arrays.asList( "A" , "AB" , "B" ));
@@ -73,10 +87,10 @@ public class MainApp_8_2 {
         IntStream rangedIntStream = IntStream.rangeClosed( 1 , 100 );
         IntStream intStream2 = Stream.of( 1 , 2 , 3 , 4 ).mapToInt(n -> n); //преобразуем обычный стрим в инт
 
-        System.out.println();
+        System.out.println("map(str -> str.length(): ");
         Stream.of("AA", "BBB", "C", "DDDD").map(str -> str.length()).forEach(System.out::println);
 
-        System.out.println();
+        System.out.println("map(int -> int*10): ");
         Stream.of(1, 2, 3, 4).map(a -> a*10).forEach(System.out::println); //ссылка на метод принт
 
         System.out.println();
