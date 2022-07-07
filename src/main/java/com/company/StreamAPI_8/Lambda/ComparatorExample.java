@@ -12,7 +12,7 @@ public class ComparatorExample {
         list.add("Goodbye");
         list.add("a");
         list.add("ab");
-        System.out.println(list);
+        System.out.println("Исходный список: " + list);
 
 //        list.sort(new Comparator<String>() {
 //            @Override
@@ -27,13 +27,12 @@ public class ComparatorExample {
         };
 
         list.sort(comparator);
-        System.out.println(list);
+        System.out.println("Отсортировали по увеличению длины с помощью компаратора: " + list);
 
         list.sort((s1, s2) -> s1.length() - s2.length());
 
 //        list.sort(Comparator.comparingInt(String::length));
 
-        System.out.println(list);
 
     }
 }

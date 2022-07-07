@@ -46,6 +46,7 @@ public class MainApp_1 {
         Runner runner = new Runner();
 
         runner.run(new ExecutableImplementation());
+        System.out.println("--------------------------");
 
         int b = 1;
         runner.run(new Executable() {
@@ -56,6 +57,7 @@ public class MainApp_1 {
                 return x + 5;
             }
         });
+        System.out.println("--------------------------");
 
         // лямбда автоматически понимает, что ей нужно вернуть int String bool и тд
         // она возвращает тот тип, который задан в сигнатуре метода. в лямбде мы не указываем тип возвращаемых значений
@@ -64,6 +66,7 @@ public class MainApp_1 {
             System.out.println("Вторая строка");
             return x + 10;
         });
+        System.out.println("--------------------------");
 
         //можно упростить сильнее без слова return
         runner.run((int x) -> x + 555);
@@ -89,7 +92,5 @@ public class MainApp_1 {
             int z = 5; // но мы можем создать новую переменную в лямбде и использовать ее
             return x + y + z;
         });
-
-
     }
 }
