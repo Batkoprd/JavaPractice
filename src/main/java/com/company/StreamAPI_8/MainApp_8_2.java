@@ -89,17 +89,8 @@ public class MainApp_8_2 {
                 this.name = name;
             }
 
-
         }
-
         Stream.of("Bob", "Max", "John").map(s -> new User(s)).collect(Collectors.toList());
-
-
-
     }
-
-
-
-
 }
 

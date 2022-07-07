@@ -20,7 +20,6 @@ public class MainApp_8 {
         });
 
         doSomething(() -> System.out.println("А еще это можно заставить распечатать"));
-
     }
 
     public static void doSomething(Runnable runnableObj) {
@@ -28,9 +27,7 @@ public class MainApp_8 {
     }
 }
 
-
 @FunctionalInterface //интерфейс, который делает 1 метод
 interface MyInterface {
     void doSomething();
-
 }
