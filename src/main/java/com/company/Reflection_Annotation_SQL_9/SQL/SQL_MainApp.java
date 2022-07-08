@@ -1,4 +1,4 @@
-package com.company.Reflection_Annotation_SQL_9.SQL;
+package main.java.com.company.Reflection_Annotation_SQL_9.SQL;
 
 import java.sql.*;
 

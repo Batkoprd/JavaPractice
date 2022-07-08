@@ -21,4 +21,13 @@ public class Cat {
     private void privateMeow() {
         System.out.println("private meow");
     }
+
+    @Override
+    public String toString() {
+        return "Cat{" +
+                "privateField=" + privateField +
+                ", defaultField=" + defaultField +
+                ", publicField=" + publicField +
+                '}';
+    }
 }

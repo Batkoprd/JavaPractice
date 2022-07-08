@@ -29,7 +29,7 @@ interface Executable2 {
 }
 
 
-public class MainApp_1 {
+public class LambdaExample {
     public static void main(String[] args) {
         //заменяет анонимные классы
         //анонимная функция, метод без названия
