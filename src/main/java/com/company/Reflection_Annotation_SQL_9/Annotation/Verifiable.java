@@ -35,7 +35,6 @@ public class Verifiable implements Doc {
     public int pow(int a, int b) {
         if (a > 0) {
             for (int i = 1; a > b; i++) {
-
                 a *= a;
             }
         }

@@ -70,8 +70,6 @@ public class Validator implements Doc {
                     Matcher m = p.matcher((CharSequence) value);
                     System.out.println(field +" " + m.matches());
                     return (m.matches());
-
-
                 }
             }
             if ((value == null) && (annotation != null && annotation.annotationType().equals(NotNull.class))) {

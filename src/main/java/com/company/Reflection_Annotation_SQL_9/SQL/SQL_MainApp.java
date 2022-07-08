@@ -15,10 +15,6 @@ public class SQL_MainApp {
         try {
             connect();
             statement.executeUpdate("INSERT INTO students (name, score) VALUES ('Bob1', 90)");
-
-
-
-
         } catch (SQLException e ) {
             e.printStackTrace();
         } finally {
