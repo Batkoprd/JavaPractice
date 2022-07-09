@@ -1,4 +1,4 @@
-package main.java.com.company.Reflection_Annotation_SQL_9.SQL;
+package com.company.Reflection_Annotation_SQL_9.SQL;
 
 import java.sql.*;
 
@@ -14,7 +14,7 @@ public class SQL_MainApp {
     public static void main(String[] args) throws Exception{
         try {
             connect();
-            statement.executeUpdate("INSERT INTO students (name, score) VALUES ('Bob1', 90)");
+            dropTableEx();
         } catch (SQLException e ) {
             e.printStackTrace();
         } finally {
